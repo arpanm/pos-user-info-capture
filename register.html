@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>User Registration</h1>
+        <div class="registration-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" readonly>
+            </div>
+            
+            <div class="address-section">
+                <h2>Select Delivery Location</h2>
+                <div id="new-address-form">
+                    <input type="text" id="address-label" placeholder="Address Label (e.g., Home, Office)">
+                    <input type="text" id="searchAddress" placeholder="Search address...">
+                    <button onclick="getCurrentLocation()">Use Current Location</button>
+                </div>
+
+                <div id="map"></div>
+                
+                <div id="selected-address">
+                    <p>Selected Address: <span id="address-display">None</span></p>
+                    <p>Coordinates: <span id="coordinates-display">None</span></p>
+                </div>
+            </div>
+            
+            <button onclick="registerUser()" class="primary-btn">Register</button>
+        </div>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="register.js"></script>
+</body>
+</html>

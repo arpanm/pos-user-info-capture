@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Address Selection & Delivery Booking</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <!-- Add Places.js for address autocomplete -->
+    <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Delivery & Installation Booking</h1>
+        
+        <div class="address-section">
+            <h2>Select Delivery Location</h2>
+            
+            <!-- Saved Addresses Section -->
+            <div class="saved-addresses">
+                <h3>Saved Addresses</h3>
+                <div id="address-list">
+                    <!-- Sample saved addresses -->
+                    <div class="address-card" onclick="selectSavedAddress(this)" data-lat="12.9716" data-lng="77.5946">
+                        <h4>Home</h4>
+                        <p>123 Main Street, Bangalore, Karnataka</p>
+                    </div>
+                    <div class="address-card" onclick="selectSavedAddress(this)" data-lat="13.0827" data-lng="77.5877">
+                        <h4>Office</h4>
+                        <p>456 Business Park, Bangalore, Karnataka</p>
+                    </div>
+                </div>
+                <button onclick="showNewAddressForm()" class="add-address-btn">+ Add New Address</button>
+            </div>
+
+            <!-- New Address Form -->
+            <div id="new-address-form" style="display: none;">
+                <h3>Add New Address</h3>
+                <input type="text" id="address-label" placeholder="Address Label (e.g., Home, Office)">
+                <input type="text" id="searchAddress" placeholder="Search address...">
+                <button onclick="getCurrentLocation()">Use Current Location</button>
+            </div>
+
+            <div id="map"></div>
+            
+            <div id="selected-address">
+                <p>Selected Address: <span id="address-display">None</span></p>
+                <p>Coordinates: <span id="coordinates-display">None</span></p>
+            </div>
+        </div>
+
+        <div class="delivery-options">
+            <h2>Delivery Options</h2>
+            <select id="deliveryType">
+                <option value="standard">Standard Delivery (Free)</option>
+                <option value="express">Express Delivery (INR 20)</option>
+            </select>
+        </div>
+
+        <div class="date-slot-section">
+            <h2>Select Date & Time Slot</h2>
+            <input type="date" id="deliveryDate" min="">
+            <select id="timeSlot">
+                <option value="">Select Time Slot</option>
+                <option value="morning">Morning (9 AM - 12 PM)</option>
+                <option value="afternoon">Afternoon (1 PM - 4 PM)</option>
+                <option value="evening">Evening (5 PM - 8 PM)</option>
+            </select>
+        </div>
+
+        <div class="installation-options">
+            <h2>Installation Options</h2>
+            <select id="installationType">
+                <option value="none">No Installation (Free)</option>
+                <option value="paid">Paid Installation (INR 50)</option>
+            </select>
+            
+            <div id="installation-schedule" style="display: none;">
+                <h3>Installation Schedule</h3>
+                <input type="date" id="installationDate" min="">
+                <select id="installationTimeSlot">
+                    <option value="">Select Time Slot</option>
+                    <option value="morning">Morning (9 AM - 12 PM)</option>
+                    <option value="afternoon">Afternoon (1 PM - 4 PM)</option>
+                    <option value="evening">Evening (5 PM - 8 PM)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="summary">
+            <h2>Order Summary</h2>
+            <div id="summary-details"></div>
+            <div class="total">
+                <div class="charge-row">
+                    <span>Delivery Charge: INR </span>
+                    <span id="delivery-amount">0</span>
+                </div>
+                <div class="charge-row">
+                    <span>Installation Charge: INR </span>
+                    <span id="installation-amount">0</span>
+                </div>
+                <div class="charge-row total">
+                    <span>Total Charges: INR </span>
+                    <span id="total-amount">0</span>
+                </div>
+            </div>
+            <button onclick="confirmBooking()" class="confirm-btn">Confirm Booking</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="userinput.js"></script>
+</body>
+</html>
